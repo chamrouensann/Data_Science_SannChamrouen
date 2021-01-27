@@ -1,0 +1,59 @@
+---
+title: "SENG RATHANAK - Midterm - Data Science - Q4"
+output: html_notebook
+---
+
+# import library
+```{r}
+library(ggplot2)
+```
+
+
+# import the dataset
+```{r}
+dataset <- read.csv("https://raw.githubusercontent.com/RathanakSeng/data/master/hate-crimes/hate_crimes.csv")
+head(dataset, 5)
+```
+# find the missing value
+```{r}
+which(is.na(dataset))
+```
+
+# clean the dataset
+```{r}
+# replace missing value with median/mode value
+processed_dataset <- imputeMissings::impute(dataset)
+
+# check if there still missing value
+which(is.na(processed_dataset))
+```
+# create 2 new columns for subplot
+```{r}
+new_dataset <- processed_dataset %>%
+  mutate(range_share_non_white = case_when(share_non_white>=0.3 ~ ">= 0.3", share_non_white < 0.3 ~ "< 0.3")) %>% 
+  mutate(range_share_population_with_high_school_degree = case_when(share_population_with_high_school_degree>0.9 ~ " > 0.9", share_population_with_high_school_degree <= 0.9 ~ "<= 0.9"))
+
+new_dataset
+```
+
+
+# Defined x, y variables
+x -> state
+y -> share_voters_voted_trump
+reason -> display number of Share of 2016 U.S. presidential voters who voted for Donald Trump base on each state in the U.S
+
+```{r}
+# Perform only on the first 5 states in U.S
+new_dataset[c(1:5), ] %>% ggplot(aes(state, share_voters_voted_trump)) + 
+  geom_col() +
+  geom_smooth(method="lm") +
+  facet_grid(range_share_non_white ~ range_share_population_with_high_school_degree) +
+  xlab("State in U.S") +
+  ylab("Share of 2016 U.S. presidential voters who voted for Donald Trump") +
+  ggtitle("Hate Crimes") +
+  theme(
+    axis.title.x = element_text(size=10, face="bold", color="green", hjust=0.5, margin=margin(t=20)),
+    axis.title.y = element_text(size=10, face="bold", color="yellow", hjust=0.5, margin=margin(r=20)),
+    title = element_text(size=25, face="bold", color="blue", hjust=0.5, margin=margin(b=25))
+  )
+```

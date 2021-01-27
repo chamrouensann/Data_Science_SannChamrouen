@@ -1,0 +1,68 @@
+---
+title: "SENG RATHANAK - Midterm - Data Science - Q1"
+output: html_notebook
+---
+
+# generate 2 matrices
+```{r}
+mat1 <- runif(36, min=1, max=100)
+mat2 <- runif(36, min=500, max=600)
+
+matrix_A <- matrix(mat1, 6, 6, byrow=TRUE)
+matrix_B <- matrix(mat2, 6, 6, byrow=TRUE)
+
+matrix_A
+matrix_B
+```
+## find the range of matrices A, B
+```{r}
+range(matrix_A)
+range(matrix_B)
+```
+## find maximum value from each row of A
+```{r}
+i <- 1
+while (i < 7) {
+  print(max(matrix_A[i,]))
+  i = i + 1
+}
+```
+## find maximum value from each row of B
+```{r}
+i <- 1
+while (i < 7) {
+  print(max(matrix_B[i,]))
+  i = i + 1
+}
+```
+## find diagonal value of A, B
+```{r}
+# diagonal of A
+dA <- diag(matrix_A)
+dA
+
+# diagonal of B
+dB <- diag(matrix_B)
+dB
+```
+## multiply matrices A, B
+```{r}
+multiplied_matrix = matrix_A %*% matrix_B
+multiplied_matrix
+```
+## replace 4th rows of A by diagonal of B
+```{r}
+matrix_A[4, ] = dB
+matrix_A
+```
+## multipy A, B store on x
+```{r}
+x <- matrix_A %*% matrix_B
+x
+```
+## divide A, B
+```{r}
+divided_matrix <- matrix_A / matrix_B
+divided_matrix
+```
+

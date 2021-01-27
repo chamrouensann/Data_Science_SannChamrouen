@@ -1,0 +1,46 @@
+---
+title: "SENG RATHANAK - Midterm - Data Science - Q2"
+output: html_notebook
+---
+
+# Create table
+```{r}
+first_name <- c("Rathanak", "Nyratt", "Sothea", "Manich", "Kimteng", "Sopheak", "Nataly", "Jenny", "Lynan", "Dara")
+second_name <- c("Seng", "Sang", "Youk", "Han", "Ley", "Tha", "Chea", "Sun", "Thon", "Ly")
+age <- c(21, 20, 18, 20, 20, 18, 23, 20, 21, 20)
+occupation <- c("Student", "Student", "Student", "Student", "Student", "Student", "Student", "Student", "Student", "Student")
+place <- c("pvh", "sr", "btm", "sr", "kpc", "kpc", "sr", "btb", "btm", "kpc")
+random_number <- runif(10, min = 1, max = 10)
+
+dataframe <- data.frame(
+  First_name=first_name,
+  Second_name=second_name,
+  Age=age,
+  Occupation=occupation,
+  Place=place,
+  Random_number=random_number
+)
+dataframe
+```
+# Extract the last column
+```{r}
+last_column <- dataframe[, 6]
+last_column
+```
+# find sum, mean, length of the extraced column
+```{r}
+# sum
+sum_last_col <- sum(last_column)
+sum_last_col
+
+# mean
+mean_last_col <- mean(last_column)
+mean_last_col
+
+# length
+length_last_col <- length(last_column)
+length_last_col
+```
+
+
+
